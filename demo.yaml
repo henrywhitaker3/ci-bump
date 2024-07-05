@@ -1,5 +1,0 @@
-name: bongo
-versions:
-  app: v1.7.125
-  chart: 1.2.0
-  lock: v56.0.0
