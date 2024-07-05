@@ -29,4 +29,4 @@ jobs:
           push: true
           tags: |
             ghcr.io/henrywhitaker3/ci-bump:${{ github.ref_name}}
-            ghcr.io/henrywhitaker3/ci-bump:v1-action
+            ghcr.io/henrywhitaker3/ci-bump:action-v1

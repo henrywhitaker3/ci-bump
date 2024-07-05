@@ -12,6 +12,6 @@ outputs:
     description: "The complete result from the ci-bump command being run"
 runs:
   using: 'docker'
-  image: 'docker://ghcr.io/henrywhitaker3/ci-bump:v1-action'
+  image: 'docker://ghcr.io/henrywhitaker3/ci-bump:action-v1'
   args:
     - ${{ inputs.cmd }}
