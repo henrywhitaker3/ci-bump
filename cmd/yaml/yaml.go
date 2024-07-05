@@ -66,14 +66,13 @@ func NewCommand() *cobra.Command {
 				file = up
 			}
 
-			if dryRun {
-				fmt.Println(string(file))
-				return nil
+			if !dryRun {
+				if err := os.WriteFile(args[0], file, 0644); err != nil {
+					return err
+				}
 			}
 
-			if err := os.WriteFile(args[0], file, 0644); err != nil {
-				return err
-			}
+			fmt.Println(string(file))
 
 			return nil
 		},
