@@ -1,4 +1,4 @@
 FROM alpine:3
 WORKDIR /
 
-COPY ci-bump /ci-bump
+COPY ci-bump /bin/ci-bump
