@@ -1,0 +1,32 @@
+name: build action
+
+on:
+  push:
+    tags:
+      - 'action-*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Login to ghcr.io
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push image
+        uses: docker/build-push-action@v5
+        with:
+          push: true
+          tags: |
+            ghcr.io/henrywhitaker3/ci-bump:${{ github.ref_name}}
+            ghcr.io/henrywhitaker3/ci-bump:v1-action

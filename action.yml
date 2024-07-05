@@ -1,0 +1,17 @@
+name: 'ci-bump - update semver version strings in files'
+description: 'Update the semver versions in files'
+branding:
+  icon: command
+  color: gray-dark
+inputs:
+  cmd:
+    description: 'The Command which should be run'
+    required: true
+outputs:
+  result:
+    description: "The complete result from the ci-bump command being run"
+runs:
+  using: 'docker'
+  image: 'docker://ghcr.io/henrywhitaker3/ci-bump:v1-action'
+  args:
+    - ${{ inputs.cmd }}

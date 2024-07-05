@@ -31,3 +31,14 @@ To set the `appVersion` field to the value `bongo`:
 ```
 ci-bump yaml --set '.appVersion=bongo' test.yaml
 ```
+
+## CI
+
+### Gitlab
+
+```yaml
+update helm version:
+  image: ghcr.io/henrywhitaker3/ci-bump:latest
+  script:
+    - ci-bump --patch '.appVersion' chart/Chart.yaml
+```
