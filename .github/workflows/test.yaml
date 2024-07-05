@@ -14,7 +14,7 @@ jobs:
         with:
           ref: main
 
-      - uses: henrywhitaker3/ci-bump@action-v1.0.1
+      - uses: henrywhitaker3/ci-bump@action-v1
         with:
           cmd: ci-bump yaml --patch '.versions.app' --minor '.versions.chart' --major '.versions.lock' demo.yaml
 

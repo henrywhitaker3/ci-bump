@@ -34,7 +34,15 @@ ci-bump yaml --set '.appVersion=bongo' test.yaml
 
 ## CI
 
-### Gitlab
+### GitHub
+
+```yaml
+- uses: henrywhitaker3/ci-bump@main
+  with:
+    cmd: ci-bump yaml --patch '.versions.app' --minor '.versions.chart' --major '.versions.lock' demo.yaml
+```
+
+### GitLab
 
 ```yaml
 update helm version:
