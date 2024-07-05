@@ -1,8 +1,10 @@
 package yaml
 
 import (
+	"errors"
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/henrywhitaker3/ci-bump/internal/files"
 	"github.com/spf13/cobra"
@@ -13,6 +15,7 @@ var (
 	patches = []string{}
 	minors  = []string{}
 	majors  = []string{}
+	sets    = []string{}
 )
 
 func NewCommand() *cobra.Command {
@@ -21,6 +24,14 @@ func NewCommand() *cobra.Command {
 		Short: "Update yaml files",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
+			setFmt := [][2]string{}
+			for _, sv := range sets {
+				if !strings.Contains(sv, "=") {
+					return errors.New("invaid --set format, must contain = separator")
+				}
+				spl := strings.Split(sv, "=")
+				setFmt = append(setFmt, [2]string{spl[0], spl[1]})
+			}
 			file, err := os.ReadFile(args[0])
 			if err != nil {
 				return err
@@ -47,6 +58,13 @@ func NewCommand() *cobra.Command {
 				}
 				file = up
 			}
+			for _, p := range setFmt {
+				up, err := files.Set(file, p[0], p[1])
+				if err != nil {
+					return err
+				}
+				file = up
+			}
 
 			if dryRun {
 				fmt.Println(string(file))
@@ -65,6 +83,7 @@ func NewCommand() *cobra.Command {
 	cmd.Flags().StringSliceVar(&patches, "patch", nil, "The key of fields to increment the patch version of")
 	cmd.Flags().StringSliceVar(&minors, "minor", nil, "The key of fields to increment the minor version of")
 	cmd.Flags().StringSliceVar(&majors, "major", nil, "The key of fields to increment the major version of")
+	cmd.Flags().StringSliceVar(&sets, "set", nil, "The field to update and a value to set it to e.g. .appVersion=v1.0.0")
 
 	return cmd
 }

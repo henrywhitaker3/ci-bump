@@ -20,8 +20,14 @@ To update the patch version of `appVersion` and `version`:
 ci-dump yaml --patch '.appVersion' --patch '.verison' test.yaml
 ```
 
-To update the patch of `appversion`, the minor version of `app.version` and the major version of `app.otherVersion`:
+To update the patch of `appVersion`, the minor version of `app.version` and the major version of `app.otherVersion`:
 
 ```
 ci-dump yaml --patch '.appVersion' --minor '.app.version' --major '.app.otherVersion' test.yaml
+```
+
+To set the `appVersion` field to the value `bongo`:
+
+```
+ci-bump yaml --set '.appVersion=bongo' test.yaml
 ```

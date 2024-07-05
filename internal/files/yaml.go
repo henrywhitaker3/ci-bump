@@ -53,6 +53,10 @@ func Major(file []byte, field string) ([]byte, error) {
 	return updateValue(file, field, sv.String())
 }
 
+func Set(file []byte, field string, value string) ([]byte, error) {
+	return updateValue(file, field, value)
+}
+
 func getValue(file []byte, field string) ([]byte, error) {
 	eval := yqlib.NewStringEvaluator()
 	out, err := eval.Evaluate(field, string(file), yqlib.NewYamlEncoder(yqlib.ConfiguredYamlPreferences), yqlib.NewYamlDecoder(yqlib.ConfiguredYamlPreferences))
