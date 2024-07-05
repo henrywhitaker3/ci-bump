@@ -16,6 +16,6 @@ jobs:
 
       - uses: henrywhitaker3/ci-bump@action-v1.0.1
         with:
-          cmd: ci-dump yaml --patch '.version.app' --minor '.versions.chart' --major '.versions.lock' demo.yaml
+          cmd: ci-bump yaml --patch '.version.app' --minor '.versions.chart' --major '.versions.lock' demo.yaml
 
       - uses: stefanzweifel/git-auto-commit-action@v5
