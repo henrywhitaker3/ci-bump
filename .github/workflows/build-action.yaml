@@ -27,6 +27,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
+          context: action
           tags: |
             ghcr.io/henrywhitaker3/ci-bump:${{ github.ref_name}}
             ghcr.io/henrywhitaker3/ci-bump:action-v1
