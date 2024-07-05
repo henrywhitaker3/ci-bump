@@ -1,6 +1,4 @@
-FROM scratch
+FROM alpine:3
 WORKDIR /
 
-COPY ci-bump /ci-bump
-
-ENTRYPOINT ["/ci-bump"]
+COPY ci-bump /usr/bin/ci-bump
