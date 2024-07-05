@@ -1,5 +1,5 @@
 name: bongo
 versions:
-  app: v1.7.123
-  chart: 1.0.98
-  lock: v54.6.879
+  app: v1.7.124
+  chart: 1.1.0
+  lock: v55.0.0
