@@ -1,0 +1,65 @@
+project_name: ci-bump
+before:
+  hooks:
+    - go mod tidy
+builds:
+  - env: [CGO_ENABLED=0]
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+      - arm
+    main: main.go
+archives:
+  - format: tar.gz
+checksum:
+  name_template: 'checksums.txt'
+dockers:
+  - goos: linux
+    goarch: amd64
+    build_flag_templates:
+      - "--platform=linux/amd64"
+    dockerfile: Dockerfile
+    image_templates:
+      - ghcr.io/henrywhitaker3/ci-bump:{{ .Tag }}-amd64
+      - ghcr.io/henrywhitaker3/ci-bump:latest-amd64
+  - goos: linux
+    goarch: arm64
+    build_flag_templates:
+      - "--platform=linux/arm64/v8"
+    dockerfile: Dockerfile
+    image_templates:
+      - ghcr.io/henrywhitaker3/ci-bump:{{ .Tag }}-arm64v8
+      - ghcr.io/henrywhitaker3/ci-bump:latest-arm64v8
+  - goos: linux
+    goarch: arm
+    build_flag_templates:
+      - "--platform=linux/arm/v6"
+    dockerfile: Dockerfile
+    image_templates:
+      - ghcr.io/henrywhitaker3/ci-bump:{{ .Tag }}-armv6
+      - ghcr.io/henrywhitaker3/ci-bump:latest-armv6
+  - goos: linux
+    goarch: arm
+    build_flag_templates:
+      - "--platform=linux/arm/v7"
+    dockerfile: Dockerfile
+    image_templates:
+      - ghcr.io/henrywhitaker3/ci-bump:{{ .Tag }}-armv7
+      - ghcr.io/henrywhitaker3/ci-bump:latest-armv7
+docker_manifests:
+  - name_template: ghcr.io/henrywhitaker3/ci-bump:{{ .Tag }}
+    image_templates:
+      - ghcr.io/henrywhitaker3/ci-bump:{{ .Tag }}-amd64
+      - ghcr.io/henrywhitaker3/ci-bump:{{ .Tag }}-arm64v8
+      - ghcr.io/henrywhitaker3/ci-bump:{{ .Tag }}-armv7
+      - ghcr.io/henrywhitaker3/ci-bump:{{ .Tag }}-armv6
+  - name_template: ghcr.io/henrywhitaker3/ci-bump:latest
+    image_templates:
+      - ghcr.io/henrywhitaker3/ci-bump:latest-amd64
+      - ghcr.io/henrywhitaker3/ci-bump:latest-arm64v8
+      - ghcr.io/henrywhitaker3/ci-bump:latest-armv7
+      - ghcr.io/henrywhitaker3/ci-bump:latest-armv6
