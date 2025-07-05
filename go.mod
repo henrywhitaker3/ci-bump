@@ -3,7 +3,7 @@ module github.com/henrywhitaker3/ci-bump
 go 1.22.2
 
 require (
-	github.com/Masterminds/semver/v3 v3.2.1
+	github.com/Masterminds/semver/v3 v3.4.0
 	github.com/mikefarah/yq/v4 v4.44.2
 	github.com/sergi/go-diff v1.3.1
 	github.com/spf13/cobra v1.8.1
